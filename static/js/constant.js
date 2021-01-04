@@ -71,8 +71,12 @@ const KEY = {
 }
 
 const GRID_HEIGHT = 20
-const GRID_WIDTH = 20
+const GRID_WIDTH = 10
 
-const START_X = -1
+const START_X = 0
 const START_Y = 4
+
+const MAIN_SCORE = 100
+const BONUS_SCORE = 30
+
 // CONSTANT

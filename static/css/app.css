@@ -97,6 +97,7 @@ body {
 .block {
     width: var(--block-size);
     height: var(--block-size);
+    border: 0.125px solid var(--bg-color);
 }
 
 .control-section {
