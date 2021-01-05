@@ -87,9 +87,6 @@ isFilled = (x, y, grid) => {
     if (!isInGrid(x, y, grid)) {
         return false
     } else {
-        // console.log('x = ',x)
-        // console.log('y = ',y)
-        // console.log(grid.board)
         return grid.board[x][y].value !== 0
     }
 }
@@ -235,11 +232,18 @@ checkGrid = (grid, game, score_span) => {
 
 updateGame = (game, row_count, score_span) => {
     game.score += (row_count*MAIN_SCORE + (row_count - 1)*BONUS_SCORE)
-    if (game.score > 800) {
-        game.level = 2
-        game.speed = 900
-        level_span.innerHTML = 'lv. ' + game.level
+
+    game.level = Math.floor(game.score / 800) + 1
+
+    let new_speed = game.speed < 200 ? 50 : (START_SPEED - game.level * 100)
+
+    if (new_speed !== game.speed) {
+        game.speed = new_speed
+        clearInterval(game.interval)
+        game.interval = setInterval(gameLoop, game.speed)
     }
+
+    level_span.innerHTML = 'lv. ' + game.level
     score_span.innerHTML = game.score
 }
 
@@ -249,7 +253,7 @@ updateGame = (game, row_count, score_span) => {
 
 let game = {
     score: 0,
-    speed: 1000,
+    speed: START_SPEED,
     level: 1,
     state: GAME_STATE.END,
     interval: null
@@ -284,7 +288,11 @@ gameLoop = () => {
             updateGrid(tetromino, grid)
             checkGrid(grid, game, score_span)
             tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
-            drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
+            if (movable(tetromino, grid, DIRECTION.DOWN)) {
+                drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
+            } else {
+                game.state = GAME_STATE.END
+            }
         }
     }
 
@@ -299,6 +307,7 @@ gameStart = () => {
 }
 
 gameReset = () => {
+    
     clearInterval(game.interval)
     resetGrid(grid)
     game.score = START_SCORE
@@ -447,3 +456,4 @@ document.addEventListener('keyup', (e) => {
 
 // END KEYBOARD EVENT
 
+console.log('%c GAME READY', 'color: #0AFFEF');

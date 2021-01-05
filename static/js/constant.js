@@ -53,7 +53,7 @@ const COLORS = [
 '#00cec9'
 ]
 
-TRANSPARENT = 'transparent'
+const TRANSPARENT = 'transparent'
 
 const DIRECTION = {
 	LEFT: 'LEFT',

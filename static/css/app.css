@@ -12,7 +12,7 @@
     --color: #243441;
     --border-radius: 20px;
     --setting-btn-color: #f88ab0;
-    --block-size: 18px;
+    --block-size: 25px;
     --button-size: 55px;
     --game-width: 414px;
     --game-height: 736px;
@@ -73,7 +73,6 @@ body {
     max-width: var(--game-width);
     height: 100%;
     max-height: var(--game-height);
-    padding-bottom: 50px;
 }
 
 .info-section {
@@ -136,7 +135,7 @@ body {
 }
 
 .control-section {
-    display: flex;
+    display: none;
 }
 
 .menu-section {
@@ -210,10 +209,9 @@ body {
 }
 
 .setting-section {
-    position: absolute;
     display: flex;
-    bottom: 20px;
-    right: 50px;
+    justify-content: center;
+    padding: 20px;
 }
 
 .setting-section button {
@@ -238,10 +236,25 @@ i.bxs-sun {
 }
 
 @media only screen and (max-width: 425px) {
+
+    :root {
+        --block-size: 18px;
+    }
+
     .game-wrapper {
         box-shadow: unset;
         border-radius: unset;
         padding-bottom: 10px;
+    }
+
+    .control-section {
+        display: flex;
+    }
+    
+    .setting-section {
+        position: absolute;
+        bottom: 20px;
+        right: 50px;
     }
 
     .play .setting-section {
