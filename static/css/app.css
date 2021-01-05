@@ -13,7 +13,7 @@
     --border-radius: 20px;
     --setting-btn-color: #f88ab0;
     --block-size: 18px;
-    --button-size: 45px;
+    --button-size: 55px;
     --game-width: 414px;
     --game-height: 736px;
 }
@@ -36,8 +36,8 @@ a {
     --bg-color: #243441;
     --color: #0AFFEF;
     --setting-btn-color: #f88ab0;
-    --wrapper-shadow: -10px 10px 20px #1f2d39,
-        10px -10px 20px #293b49;
+    --wrapper-shadow: -10px 10px 10px #1f2d39,
+        10px -10px 10px #293b49;
     --btn-shadow: -5px 5px 10px #1f2d39,
         5px -5px 10px #293b49;
     --btn-shadow-inset: inset -5px 5px 10px #1f2d39,
@@ -77,11 +77,20 @@ body {
 }
 
 .info-section {
+    position: relative;
     text-align: center;
     font-weight: 600;
     padding: 20px;
     font-size: 25px;
     color: var(--color);
+}
+
+.info-section .level {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30px;
+    font-size: 18px;
 }
 
 .board-section {
@@ -92,6 +101,32 @@ body {
     padding: 10px;
     box-shadow: var(--board-shadow-inset);
     border-radius: 10px;
+    transform: scale(0);
+}
+
+.board-section,
+.info-section,
+.control-section {
+    /* transition: transform .5s ease-in-out; */
+    transform: scale(0);
+}
+
+.play .board-section,
+.play .info-section,
+.play .control-section {
+    transform: scale(1);
+}
+
+.play .menu-section {
+    transform: scale(0);
+}
+
+#btn-new-game {
+    display: none;
+}
+
+.pause #btn-new-game {
+    display: block;
 }
 
 .block {
@@ -102,6 +137,17 @@ body {
 
 .control-section {
     display: flex;
+}
+
+.menu-section {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.menu-section button {
+    margin-bottom: 30px;
 }
 
 .col {
@@ -155,6 +201,10 @@ body {
     font-size: 30px;
 }
 
+.btn-width {
+    width: 200px;
+}
+
 .arrow-control .btn {
     margin: 3px;
 }
@@ -187,14 +237,14 @@ i.bxs-sun {
     display: none;
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 425px) {
     .game-wrapper {
         box-shadow: unset;
         border-radius: unset;
         padding-bottom: 10px;
     }
 
-    .setting-section {
+    .play .setting-section {
         flex-direction: column;
         bottom: unset;
         top: 50%;

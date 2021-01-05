@@ -76,7 +76,16 @@ const GRID_WIDTH = 10
 const START_X = 0
 const START_Y = 4
 
+const START_SCORE = 0
+const START_SPEED = 1000
+
 const MAIN_SCORE = 100
 const BONUS_SCORE = 30
+
+const GAME_STATE = {
+	PLAY: 'PLAY',
+	PAUSE: 'PAUSE',
+	END: 'END'
+}
 
 // CONSTANT

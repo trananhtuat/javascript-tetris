@@ -19,8 +19,8 @@ newGrid = (width, height) => {
         grid[i] = new Array(width)
     }
     let index = 0;
-    for (let i = 0; i < 20; i++) {
-        for (let j = 0; j < 10; j++) {
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
             grid[i][j] = {
                 index: index++,
                 value: 0
@@ -32,6 +32,17 @@ newGrid = (width, height) => {
         width: width,
         height: height
     }
+}
+
+resetGrid = (grid) => {
+    for (let i = 0; i < grid.height; i++) {
+        for (let j = 0; j < grid.width; j++) {
+            grid.board[i][j].value = 0
+        }
+    }
+    Array.from(field).forEach(e => {
+        e.style.background = TRANSPARENT
+    })
 }
 
 newTetromino = (blocks, colors, start_x, start_y) => {
@@ -212,37 +223,108 @@ deleteRow = (row_index, grid) => {
 checkGrid = (grid, game, score_span) => {
     let row_count = 0
     grid.board.forEach((row, i) => {
-        // console.log(checkFilledRow(row))
         if (checkFilledRow(row)) {
             deleteRow(i, grid)
             row_count++
         }
     })
     if (row_count > 0) {
-        updateScore(game, row_count, score_span)
+        updateGame(game, row_count, score_span)
     }
 }
 
-updateScore = (game, row_count, score_span) => {
+updateGame = (game, row_count, score_span) => {
     game.score += (row_count*MAIN_SCORE + (row_count - 1)*BONUS_SCORE)
+    if (game.score > 800) {
+        game.level = 2
+        game.speed = 900
+        level_span.innerHTML = 'lv. ' + game.level
+    }
     score_span.innerHTML = game.score
 }
 
 // END FUNCTION
 
-// KEYBOARD EVENT
+// GAME LOOP
 
-let btn_theme = document.querySelector('#btn-theme')
-btn_theme.addEventListener('click', (e) => {
-    let body = document.querySelector('body')
-    body.classList.toggle('dark')
-})
+let game = {
+    score: 0,
+    speed: 1000,
+    level: 1,
+    state: GAME_STATE.END,
+    interval: null
+}
+
+let score_span = document.querySelector('#score')
+let level_span = document.querySelector('#level')
+
+score_span.innerHTML = game.score
+
+let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
+
+let tetromino = null
+
+// drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
+
+gamePause = () => {
+    game.state = GAME_STATE.PAUSE
+}
+
+gameResume = () => {
+    game.state = GAME_STATE.PLAY
+}
+
+gameLoop = () => {
+    // DEFINE OBJECT
+
+    if (game.state !== GAME_STATE.PAUSE) {
+        if (movable(tetromino, grid, DIRECTION.DOWN)) {
+            moveDown(tetromino, grid)
+        } else {
+            updateGrid(tetromino, grid)
+            checkGrid(grid, game, score_span)
+            tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
+            drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
+        }
+    }
+
+    // END DEFINE OBJECT
+}
+
+gameStart = () => {
+    game.state = GAME_STATE.PLAY
+    tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
+    drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
+    game.interval = setInterval(gameLoop, game.speed)
+}
+
+gameReset = () => {
+    clearInterval(game.interval)
+    resetGrid(grid)
+    game.score = START_SCORE
+    game.speed = START_SPEED
+    game.state = GAME_STATE.PLAY
+    game.level = 1
+    game.interval = null
+    tetromino = null
+
+    level_span.innerHTML = 'lv. ' + game.level
+    score_span.innerHTML = game.score
+}
+
+// gameStart()
+
+// END GAME LOOP
+
+// KEYBOARD EVENT
 
 let btn_up = document.querySelector('#btn-up')
 let btn_down = document.querySelector('#btn-down')
 let btn_left = document.querySelector('#btn-left')
 let btn_right = document.querySelector('#btn-right')
 let btn_drop = document.querySelector('#btn-drop')
+
+let btn_play = document.querySelector('#btn-play')
 
 toggleBtn = (btn) => {
     btn.classList.toggle('active')
@@ -252,6 +334,7 @@ let btns = document.querySelectorAll('[id*="btn-"]')
 
 btns.forEach(e => {
     let btn_id = e.getAttribute('id')
+    let body = document.querySelector('body')
     e.addEventListener('click', () => {
         switch(btn_id) {
             case 'btn-up':
@@ -269,11 +352,50 @@ btns.forEach(e => {
             case 'btn-drop':
                 hardDrop(tetromino, grid)
                 break
+            case 'btn-theme':
+                body.classList.toggle('dark')
+
+                let status_bar = document.querySelector("meta[name='theme-color'")
+                status_bar.setAttribute("content", body.classList.contains('dark') ? "#243441" : "#ECF0F3")
+
+                break
+            case 'btn-pause':
+                if (game.state !== GAME_STATE.PAUSE) {
+                    gamePause()
+                    body.classList.toggle('pause')
+                    btn_play.innerHTML = 'resume'
+                } else {
+                    body.classList.toggle('pause')
+                    gameResume()
+                }
+                body.classList.toggle('play')
+                break
+            case 'btn-play':
+                body.classList.toggle('play')
+                if (game.state === GAME_STATE.PAUSE) {
+                    body.classList.toggle('pause')
+                    gameResume()
+                    return
+                }
+                gameStart()
+                break
+            case 'btn-new-game':
+                gameReset()
+                body.classList.toggle('pause')
+                body.classList.toggle('play')
+                gameStart()
+                break
         }
     })
 })
 
+// let btn_theme = document.querySelector('#btn-theme')
+// btn_theme.addEventListener('click', (e) => {
+    
+// })
+
 document.addEventListener('keydown', (e) => {
+    e.preventDefault()
     let key = e.keyCode
     switch(key) {
         case KEY.UP:
@@ -293,7 +415,6 @@ document.addEventListener('keydown', (e) => {
             moveRight(tetromino, grid)
             break
         case KEY.SPACE:
-            e.preventDefault()
             toggleBtn(btn_drop)
             hardDrop(tetromino, grid)
             break
@@ -325,44 +446,4 @@ document.addEventListener('keyup', (e) => {
 })
 
 // END KEYBOARD EVENT
-
-// GAME LOOP
-
-let game = {
-    score: 0,
-    speed: 1000,
-}
-
-let score = 0
-
-let score_span = document.querySelector('#score')
-
-score_span.innerHTML = game.score
-
-let speed = 1000
-
-let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
-
-let tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
-
-drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
-
-gameLoop = setInterval(() => {
-    // DEFINE OBJECT
-
-    console.log(game.score)
-
-    if (movable(tetromino, grid, DIRECTION.DOWN)) {
-        moveDown(tetromino, grid)
-    } else {
-        updateGrid(tetromino, grid)
-        checkGrid(grid, game, score_span)
-        tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
-        drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
-    }
-
-    // END DEFINE OBJECT
-}, speed);
-
-// END GAME LOOP
 

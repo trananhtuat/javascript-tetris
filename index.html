@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#ECF0F3">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#ECF0F3">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ECF0F3">
     <title>
         JavaScript Tetris
     </title>
@@ -14,12 +20,15 @@
     <link rel="stylesheet" href="./static/css/app.css">
 </head>
 
-<body>
+<body class="dark">
     <div class="container">
         <div class="game-wrapper">
             <div class="info-section">
                 <span id="score">
                     123456789
+                </span>
+                <span class="level" id="level">
+                    lv. 1
                 </span>
             </div>
             <div class="board-section"></div>
@@ -52,12 +61,26 @@
                 </div>
             </div>
             <div class="setting-section">
-                <button class="btn">
+                <button class="btn" id="btn-pause">
                     <i class='bx bx-pause'></i>
                 </button>
                 <button class="btn" id="btn-theme">
                     <i class='bx bxs-sun'></i>
                     <i class='bx bxs-moon'></i>
+                </button>
+                <button class="btn" id="btn-help">
+                    <i class='bx bx-question-mark'></i>
+                </button>
+            </div>
+            <div class="menu-section">
+                <button class="btn btn-width" id="btn-play">
+                    play
+                </button>
+                <button class="btn btn-width" id="btn-new-game">
+                    new game
+                </button>
+                <button class="btn btn-width" id="btn-how-to">
+                    how to
                 </button>
             </div>
         </div>
