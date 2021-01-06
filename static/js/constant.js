@@ -67,7 +67,8 @@ const KEY = {
 	DOWN: 40,
 	LEFT: 37,
 	RIGHT: 39,
-	SPACE: 32
+	SPACE: 32,
+	P: 80
 }
 
 const GRID_HEIGHT = 20

@@ -1,14 +1,3 @@
-let board_section = document.querySelector('.board-section')
-
-for (let index = 0; index < 200; index++) {
-    let block = `
-        <div class="block">
-            <div></div>
-        </div>
-    `
-    board_section.innerHTML += block
-}
-
 let field = document.getElementsByClassName('block')
 
 // FUNCTION
@@ -278,10 +267,14 @@ gameResume = () => {
     game.state = GAME_STATE.PLAY
 }
 
+gameEnd = () => {
+    
+}
+
 gameLoop = () => {
     // DEFINE OBJECT
 
-    if (game.state !== GAME_STATE.PAUSE) {
+    if (game.state === GAME_STATE.PLAY) {
         if (movable(tetromino, grid, DIRECTION.DOWN)) {
             moveDown(tetromino, grid)
         } else {
@@ -292,6 +285,9 @@ gameLoop = () => {
                 drawTetromino(tetromino, grid, GRID_HEIGHT, GRID_WIDTH)
             } else {
                 game.state = GAME_STATE.END
+                let body = document.querySelector('body')
+                body.classList.toggle('end')
+                body.classList.toggle('play')
             }
         }
     }
@@ -371,18 +367,18 @@ btns.forEach(e => {
             case 'btn-pause':
                 if (game.state !== GAME_STATE.PAUSE) {
                     gamePause()
-                    body.classList.toggle('pause')
+                    body.classList.add('pause')
                     btn_play.innerHTML = 'resume'
                 } else {
-                    body.classList.toggle('pause')
+                    body.classList.remove('pause')
                     gameResume()
                 }
-                body.classList.toggle('play')
+                body.classList.remove('play')
                 break
             case 'btn-play':
-                body.classList.toggle('play')
+                body.classList.add('play')
                 if (game.state === GAME_STATE.PAUSE) {
-                    body.classList.toggle('pause')
+                    body.classList.remove('pause')
                     gameResume()
                     return
                 }
@@ -390,8 +386,9 @@ btns.forEach(e => {
                 break
             case 'btn-new-game':
                 gameReset()
-                body.classList.toggle('pause')
-                body.classList.toggle('play')
+                body.classList.remove('pause')
+                body.classList.remove('end')
+                body.classList.add('play')
                 gameStart()
                 break
         }
@@ -404,8 +401,9 @@ btns.forEach(e => {
 // })
 
 document.addEventListener('keydown', (e) => {
+    let body = document.querySelector('body')
     e.preventDefault()
-    let key = e.keyCode
+    let key = e.which
     switch(key) {
         case KEY.UP:
             toggleBtn(btn_up)
@@ -426,6 +424,18 @@ document.addEventListener('keydown', (e) => {
         case KEY.SPACE:
             toggleBtn(btn_drop)
             hardDrop(tetromino, grid)
+            break
+        case KEY.P:
+            if (game.state !== GAME_STATE.PAUSE) {
+                gamePause()
+                body.classList.add('pause')
+                body.classList.remove('play')
+                btn_play.innerHTML = 'resume'
+            } else {
+                body.classList.remove('pause')
+                body.classList.add('play')
+                gameResume()
+            }
             break
     }
 })

@@ -124,7 +124,8 @@ body {
     display: none;
 }
 
-.pause #btn-new-game {
+.pause #btn-new-game,
+.end #btn-new-game {
     display: block;
 }
 
@@ -219,6 +220,30 @@ body {
     color: var(--setting-btn-color);
 }
 
+.result {
+    text-align: center;
+    margin-bottom: 90px;
+    display: none;
+}
+
+.end .result {
+    display: block;
+}
+
+.end #btn-play,
+.end #btn-how-to {
+    display: none;
+}
+
+.result p {
+    color: var(--setting-btn-color);
+}
+
+.result h1 {
+    color: var(--color);
+    margin-bottom: 30px;
+}
+
 i.bxs-moon {
     display: block;
 }
@@ -239,6 +264,10 @@ i.bxs-sun {
 
     :root {
         --block-size: 18px;
+    }
+
+    #btn-how-to {
+        display: none;
     }
 
     .game-wrapper {
@@ -262,7 +291,7 @@ i.bxs-sun {
         bottom: unset;
         top: 50%;
         transform: translateY(-50%);
-        right: 10px;
+        right: 2px;
     }
 
     .setting-section button {
