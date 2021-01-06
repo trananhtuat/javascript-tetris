@@ -123,7 +123,12 @@ body {
     transform: scale(0);
 }
 
-#btn-new-game {
+.play #btn-pause {
+    display: flex;
+}
+
+#btn-new-game,
+#btn-pause {
     display: none;
 }
 
@@ -208,6 +213,37 @@ body {
     width: 200px;
 }
 
+.how-to {
+    position: absolute;
+    top: 50%;
+    transform: translate(100%, -50%);
+    right: 0;
+    box-shadow: var(--wrapper-shadow);
+    padding: 30px;
+    border-radius: 20px;
+    background-color: var(--bg-color);
+    transition: transform .5s ease-in-out;
+    color: var(--color);
+}
+
+.how-to.active {
+    transform: translate(0, -50%);
+}
+
+.how-to h3 {
+    margin-bottom: 40px;
+}
+
+.how-to td {
+    padding: 20px;
+}
+
+.keycap {
+    width: calc(var(--button-size) * 2);
+    color: var(--setting-btn-color);
+    font-size: 20px;
+}
+
 .arrow-control .btn {
     margin: 3px;
 }
@@ -219,7 +255,7 @@ body {
 }
 
 .setting-section button {
-    margin-left: 15px;
+    margin: 0 10px;
     color: var(--setting-btn-color);
 }
 
@@ -233,8 +269,7 @@ body {
     display: block;
 }
 
-.end #btn-play,
-.end #btn-how-to {
+.end #btn-play {
     display: none;
 }
 
@@ -263,45 +298,6 @@ i.bxs-sun {
     display: none;
 }
 
-@media only screen and (max-width: 425px) {
-
-    :root {
-        --block-size: 18px;
-    }
-
-    #btn-how-to {
-        display: none;
-    }
-
-    .game-wrapper {
-        box-shadow: unset;
-        border-radius: unset;
-        padding-bottom: 10px;
-    }
-
-    .control-section {
-        display: flex;
-    }
-    
-    .setting-section {
-        position: absolute;
-        bottom: 20px;
-        right: 50px;
-    }
-
-    .play .setting-section {
-        flex-direction: column;
-        bottom: unset;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 2px;
-    }
-
-    .setting-section button {
-        margin-bottom: 15px;
-    }
-}
-
 .container img.fall {
     position: absolute;
     animation: fall linear infinite;
@@ -322,5 +318,142 @@ i.bxs-sun {
     100% {
         transform: translateY(2000%) rotate(90deg);
         opacity: 1;
+    }
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--bg-color);
+    z-index: 100;
+    animation: hide 1s linear forwards;
+    animation-delay: 3.5s;
+}
+
+.loading .square {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: calc(var(--block-size) * 4);
+    height: calc(var(--block-size) * 4);
+    overflow: hidden;
+    animation: rotate .5s linear forwards;
+    animation-delay: 2.8s;
+}
+
+.loading .square div {
+    width: var(--block-size);
+    height: var(--block-size);
+    border: 1px solid var(--bg-color);
+    animation: loading .7s linear forwards;
+    transform: translateY(-500%);
+}
+
+.loading .square div:nth-child(1),
+.loading .square div:nth-child(2),
+.loading .square div:nth-child(3),
+.loading .square div:nth-child(7) {
+    background-color: #00cec9;
+    animation-delay: 2.1s;
+}
+
+.loading .square div:nth-child(4),
+.loading .square div:nth-child(8),
+.loading .square div:nth-child(12),
+.loading .square div:nth-child(16) {
+    background-color: #c23616;
+    animation-delay: 1.4s;
+}
+
+.loading .square div:nth-child(5),
+.loading .square div:nth-child(9),
+.loading .square div:nth-child(13),
+.loading .square div:nth-child(14) {
+    background-color: #e84393;
+}
+
+.loading .square div:nth-child(6),
+.loading .square div:nth-child(10),
+.loading .square div:nth-child(11),
+.loading .square div:nth-child(15) {
+    background-color: #e1b12c;
+    animation-delay: .7s;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateY(-200%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+
+    :root {
+        --block-size: 18px;
+    }
+
+    #btn-help,
+    .how-to {
+        display: none;
+    }
+
+    .game-wrapper {
+        box-shadow: unset;
+        border-radius: unset;
+        padding-bottom: 10px;
+    }
+
+    .control-section {
+        display: flex;
+    }
+
+    .setting-section {
+        padding: unset;
+    }
+
+    .play .setting-section {
+        position: absolute;
+        flex-direction: column;
+        bottom: unset;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 2px;
+    }
+
+    .setting-section button {
+        margin-bottom: 15px;
+    }
+
+    .container img.fall {
+        display: none;
     }
 }

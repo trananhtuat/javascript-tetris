@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./static/css/app.css">
 </head>
 
-<body class="dark">
+<body>
     <div class="container">
         <div class="game-wrapper">
             <div class="info-section">
@@ -68,9 +68,9 @@
                     <i class='bx bxs-sun'></i>
                     <i class='bx bxs-moon'></i>
                 </button>
-                <!-- <button class="btn" id="btn-help">
+                <button class="btn" id="btn-help">
                     <i class='bx bx-question-mark'></i>
-                </button> -->
+                </button>
             </div>
             <div class="menu-section">
                 <div class="result">
@@ -80,13 +80,13 @@
                     <p>
                         level
                     </p>
-                    <h1>
+                    <h1 id="result-level">
                         1
                     </h1>
                     <p>
                         score
                     </p>
-                    <h1>
+                    <h1 id="result-score">
                         11234
                     </h1>
                 </div>
@@ -96,11 +96,78 @@
                 <button class="btn btn-width" id="btn-new-game">
                     new game
                 </button>
-                <button class="btn btn-width" id="btn-how-to">
-                    how to
-                </button>
             </div>
         </div>
+    </div>
+    <div class="how-to">
+        <h3>
+            KEYBOARD CONTROL
+        </h3>
+        <table>
+            <tr>
+                <td>
+                    <button class="btn keycap">
+                        <i class='bx bxs-chevron-left'></i>
+                    </button>
+                </td>
+                <td>
+                    Move left
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn keycap">
+                        <i class='bx bxs-chevron-right'></i>
+                    </button>
+                </td>
+                <td>
+                    Move right
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn keycap">
+                        <i class='bx bxs-chevron-down'></i>
+                    </button>
+                </td>
+                <td>
+                    Move down
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn keycap">
+                        <i class='bx bxs-chevron-up'></i>
+                    </button>
+                </td>
+                <td>
+                    Rotate
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn keycap">
+                        space
+                    </button>
+                </td>
+                <td>
+                    Hard drop
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn keycap">
+                        P
+                    </button>
+                </td>
+                <td>
+                    Pause/Resume game
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="loading">
+        <div class="square"></div>
     </div>
     <script src="./static/js/app.js"></script>
     <script src="./static/js/constant.js"></script>

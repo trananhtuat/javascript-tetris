@@ -288,6 +288,12 @@ gameLoop = () => {
                 let body = document.querySelector('body')
                 body.classList.toggle('end')
                 body.classList.toggle('play')
+
+                let rs_level = document.querySelector('#result-level')
+                let rs_score = document.querySelector('#result-score')
+
+                rs_level.innerHTML = game.level
+                rs_score.innerHTML = game.score
             }
         }
     }
@@ -359,21 +365,23 @@ btns.forEach(e => {
                 break
             case 'btn-theme':
                 body.classList.toggle('dark')
-
                 let status_bar = document.querySelector("meta[name='theme-color'")
                 status_bar.setAttribute("content", body.classList.contains('dark') ? "#243441" : "#ECF0F3")
-
                 break
             case 'btn-pause':
-                if (game.state !== GAME_STATE.PAUSE) {
-                    gamePause()
+                console.log(game)
+                let curr_state = game.state
+                if (curr_state === GAME_STATE.PLAY) {
                     body.classList.add('pause')
                     btn_play.innerHTML = 'resume'
-                } else {
+                    body.classList.remove('play')
+                    gamePause()
+                } 
+                if (curr_state === GAME_STATE.PAUSE) {
                     body.classList.remove('pause')
+                    body.classList.add('play')
                     gameResume()
                 }
-                body.classList.remove('play')
                 break
             case 'btn-play':
                 body.classList.add('play')
@@ -390,6 +398,10 @@ btns.forEach(e => {
                 body.classList.remove('end')
                 body.classList.add('play')
                 gameStart()
+                break
+            case 'btn-help':
+                let how_to = document.querySelector('.how-to')
+                how_to.classList.toggle('active')
                 break
         }
     })

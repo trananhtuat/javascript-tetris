@@ -18,7 +18,7 @@ falls = () => {
 
 	while (i < fall_count) {
 
-		let img_index = Math.floor(Math.random() * 7) + 1;
+		let img_index = Math.floor(Math.random() * 6) + 1;
 
 		let x = Math.floor(Math.random() * window.innerWidth)
 
@@ -47,4 +47,10 @@ falls = () => {
 }
 
 falls()
+
+let loading_square = document.querySelector('.square')
+
+for (let index = 0; index < 16; index++) {
+	loading_square.innerHTML += `<div></div>`
+}
 
