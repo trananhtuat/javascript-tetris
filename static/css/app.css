@@ -265,6 +265,13 @@ body {
     display: none;
 }
 
+.brand {
+    padding: 40px 0;
+    font-size: 25px;
+    color: var(--color);
+    text-align: center;
+}
+
 .end .result {
     display: block;
 }
