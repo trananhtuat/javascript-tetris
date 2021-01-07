@@ -1,13 +1,9 @@
 :root {
-    --bg-color: #ECF0F3;
-    --wrapper-shadow: -10px 10px 20px #dbdfe2,
-        10px -10px 20px #fdffff;
-    --btn-shadow: -5px 5px 10px #c4c7ca,
-        5px -5px 10px #ffffff;
-    --btn-shadow-inset: inset -5px 5px 10px #c4c7ca,
-        inset 5px -5px 10px #ffffff;
-    --board-shadow-inset: inset -5px 5px 8px #d4d8db,
-        inset 5px -5px 8px #ffffff;
+    --bg-color: #ecf0f3;
+    --wrapper-shadow: -10px 10px 20px #dbdfe2, 10px -10px 20px #fdffff;
+    --btn-shadow: -5px 5px 10px #c4c7ca, 5px -5px 10px #ffffff;
+    --btn-shadow-inset: inset -5px 5px 10px #c4c7ca, inset 5px -5px 10px #ffffff;
+    --board-shadow-inset: inset -5px 5px 8px #d4d8db, inset 5px -5px 8px #ffffff;
 
     --color: #243441;
     --border-radius: 20px;
@@ -34,23 +30,19 @@ a {
 
 .dark {
     --bg-color: #243441;
-    --color: #0AFFEF;
+    --color: #0affef;
     --setting-btn-color: #f88ab0;
-    --wrapper-shadow: -10px 10px 10px #1f2d39,
-        10px -10px 10px #293b49;
-    --btn-shadow: -5px 5px 10px #1f2d39,
-        5px -5px 10px #293b49;
-    --btn-shadow-inset: inset -5px 5px 10px #1f2d39,
-        inset 5px -5px 10px #293b49;
-    --board-shadow-inset: inset -5px 5px 8px #21303c,
-        inset 5px -5px 8px #273846;
+    --wrapper-shadow: -10px 10px 10px #1f2d39, 10px -10px 10px #293b49;
+    --btn-shadow: -5px 5px 10px #1f2d39, 5px -5px 10px #293b49;
+    --btn-shadow-inset: inset -5px 5px 10px #1f2d39, inset 5px -5px 10px #293b49;
+    --board-shadow-inset: inset -5px 5px 8px #21303c, inset 5px -5px 8px #273846;
 }
 
 html,
 body {
     height: 100vh;
     background-color: var(--bg-color);
-    font-family: 'Krona One', sans-serif;
+    font-family: "Krona One", sans-serif;
     overflow: hidden;
 }
 
@@ -222,7 +214,7 @@ body {
     padding: 30px;
     border-radius: 20px;
     background-color: var(--bg-color);
-    transition: transform .5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
     color: var(--color);
 }
 
@@ -340,7 +332,7 @@ i.bxs-sun {
     background-color: var(--bg-color);
     z-index: 100;
     animation: hide 1s linear forwards;
-    animation-delay: 3.5s;
+    animation-delay: 2.7s;
 }
 
 .loading .square {
@@ -349,15 +341,15 @@ i.bxs-sun {
     width: calc(var(--block-size) * 4);
     height: calc(var(--block-size) * 4);
     overflow: hidden;
-    animation: rotate .5s linear forwards;
-    animation-delay: 2.8s;
+    animation: rotate 0.5s linear forwards;
+    animation-delay: 2s;
 }
 
 .loading .square div {
     width: var(--block-size);
     height: var(--block-size);
     border: 1px solid var(--bg-color);
-    animation: loading .7s linear forwards;
+    animation: loading 0.5s linear forwards;
     transform: translateY(-500%);
 }
 
@@ -366,7 +358,7 @@ i.bxs-sun {
 .loading .square div:nth-child(3),
 .loading .square div:nth-child(7) {
     background-color: #00cec9;
-    animation-delay: 2.1s;
+    animation-delay: 1.5s;
 }
 
 .loading .square div:nth-child(4),
@@ -374,7 +366,7 @@ i.bxs-sun {
 .loading .square div:nth-child(12),
 .loading .square div:nth-child(16) {
     background-color: #c23616;
-    animation-delay: 1.4s;
+    animation-delay: 1s;
 }
 
 .loading .square div:nth-child(5),
@@ -389,7 +381,7 @@ i.bxs-sun {
 .loading .square div:nth-child(11),
 .loading .square div:nth-child(15) {
     background-color: #e1b12c;
-    animation-delay: .7s;
+    animation-delay: 0.5s;
 }
 
 @keyframes loading {
@@ -423,7 +415,6 @@ i.bxs-sun {
 }
 
 @media only screen and (max-width: 425px) {
-
     :root {
         --block-size: 18px;
     }
