@@ -342,7 +342,7 @@ i.bxs-sun {
     height: calc(var(--block-size) * 4);
     overflow: hidden;
     animation: rotate 0.5s linear forwards;
-    animation-delay: 2s;
+    animation-delay: 2.2s;
 }
 
 .loading .square div {

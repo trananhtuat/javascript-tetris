@@ -2,9 +2,7 @@ let board_section = document.querySelector('.board-section')
 
 for (let index = 0; index < 200; index++) {
     let block = `
-        <div class="block">
-            <div></div>
-        </div>
+        <div class="block"></div>
     `
     board_section.innerHTML += block
 }
@@ -25,7 +23,7 @@ falls = () => {
 		let y = Math.floor(Math.random() * window.innerHeight)
 
 		let size = Math.random() * 40
-		let duration = Math.random() * 70
+		let duration = Math.random() * 70 + 30
 
 		let img = document.createElement('img')
 
