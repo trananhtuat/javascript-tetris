@@ -263,7 +263,7 @@ i.bxs-sun {
     width: calc(var(--block-size) * 4);
     height: calc(var(--block-size) * 4);
     overflow: hidden;
-    animation: rotate .5s linear forwards;
+    animation: rotate 0.5s linear forwards;
     animation-delay: 2.2s;
 }
 
@@ -272,7 +272,7 @@ i.bxs-sun {
     height: var(--block-size);
     border: 1px solid var(--bg-color);
     background-color: var(--color);
-    animation: down .5s linear forwards;
+    animation: down 0.5s linear forwards;
     transform: translateY(-500%);
 }
 
@@ -291,7 +291,7 @@ i.bxs-sun {
 .loading .square div:nth-child(11),
 .loading .square div:nth-child(15) {
     background-color: #e1b12c;
-    animation-delay: .5s;
+    animation-delay: 0.5s;
 }
 /* end S block */
 
@@ -430,7 +430,7 @@ i.bxs-sun {
 
     .setting-section {
         padding: unset;
-        margin-top: -40px
+        margin-top: -40px;
     }
 
     .play .setting-section {
@@ -449,6 +449,10 @@ i.bxs-sun {
 
     .how-to,
     #btn-help {
+        display: none;
+    }
+
+    .container img.fall {
         display: none;
     }
 }
