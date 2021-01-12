@@ -4,74 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#ECF0F3">
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#ECF0F3">
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#ECF0F3">
     <title>
         AT gaming - JavaScript Tetris
     </title>
-    <link rel="icon" href="./static/assets/images/favion.png" type="image/png">
+    <link rel="shortcut icon" href="./static/assets/images/favion.png" type="image/png">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./static/css/app.css">
 </head>
 
 <body>
+
+    <!-- MAIN GAME -->
     <div class="container">
         <div class="game-wrapper">
             <div class="info-section">
                 <span id="score">
-                    123456789
+                    1234567
                 </span>
-                <span class="level" id="level">
+                <span id="level">
                     lv. 1
                 </span>
             </div>
             <div class="board-section"></div>
+            <!-- BUTTON CONTROL -->
             <div class="control-section">
                 <div class="col">
                     <div class="arrow-control">
                         <div></div>
                         <button class="btn" id="btn-up">
-                            <i class='bx bx-rotate-right'></i>
+                            <i class="bx bx-rotate-left"></i>
                         </button>
                         <div></div>
                         <button class="btn" id="btn-left">
-                            <i class='bx bxs-chevron-left'></i>
+                            <i class="bx bxs-chevron-left"></i>
                         </button>
                         <div></div>
                         <button class="btn" id="btn-right">
-                            <i class='bx bxs-chevron-right'></i>
+                            <i class="bx bxs-chevron-right"></i>
                         </button>
                         <div></div>
                         <button class="btn" id="btn-down">
-                            <i class='bx bxs-chevron-down'></i>
+                            <i class="bx bxs-chevron-down"></i>
                         </button>
                         <div></div>
                     </div>
                 </div>
                 <div class="col">
                     <button class="btn btn-large" id="btn-drop">
-                        <i class='bx bxs-chevrons-down'></i>
+                        <i class="bx bxs-chevrons-down"></i>
                     </button>
                 </div>
             </div>
+            <!-- END BUTTON CONTROL -->
+            <!-- SETTING SECTION -->
             <div class="setting-section">
                 <button class="btn" id="btn-pause">
-                    <i class='bx bx-pause'></i>
+                    <i class="bx bx-pause"></i>
                 </button>
                 <button class="btn" id="btn-theme">
-                    <i class='bx bxs-sun'></i>
-                    <i class='bx bxs-moon'></i>
+                    <i class="bx bxs-moon"></i>
+                    <i class="bx bxs-sun"></i>
                 </button>
                 <button class="btn" id="btn-help">
-                    <i class='bx bx-question-mark'></i>
+                    <i class="bx bx-question-mark"></i>
                 </button>
             </div>
+            <!-- END SETTING SECTION -->
+            <!-- MENU SECTION -->
             <div class="menu-section">
                 <div class="brand">
                     <h2>
@@ -93,7 +94,7 @@
                         score
                     </p>
                     <h1 id="result-score">
-                        11234
+                        123456
                     </h1>
                 </div>
                 <button class="btn btn-width" id="btn-play">
@@ -103,8 +104,11 @@
                     new game
                 </button>
             </div>
+            <!-- END MENU SECTION -->
         </div>
     </div>
+    <!-- END MAIN GAME -->
+    <!-- HELP SECTION -->
     <div class="how-to">
         <h3>
             KEYBOARD CONTROL
@@ -113,7 +117,7 @@
             <tr>
                 <td>
                     <button class="btn keycap">
-                        <i class='bx bxs-chevron-left'></i>
+                        <i class="bx bxs-chevron-left"></i>
                     </button>
                 </td>
                 <td>
@@ -123,7 +127,7 @@
             <tr>
                 <td>
                     <button class="btn keycap">
-                        <i class='bx bxs-chevron-right'></i>
+                        <i class="bx bxs-chevron-right"></i>
                     </button>
                 </td>
                 <td>
@@ -133,7 +137,7 @@
             <tr>
                 <td>
                     <button class="btn keycap">
-                        <i class='bx bxs-chevron-down'></i>
+                        <i class="bx bxs-chevron-down"></i>
                     </button>
                 </td>
                 <td>
@@ -143,11 +147,11 @@
             <tr>
                 <td>
                     <button class="btn keycap">
-                        <i class='bx bxs-chevron-up'></i>
+                        <i class="bx bxs-chevron-up"></i>
                     </button>
                 </td>
                 <td>
-                    Rotate
+                    Move rotate
                 </td>
             </tr>
             <tr>
@@ -163,7 +167,7 @@
             <tr>
                 <td>
                     <button class="btn keycap">
-                        P
+                        p
                     </button>
                 </td>
                 <td>
@@ -172,12 +176,19 @@
             </tr>
         </table>
     </div>
+    <!-- END HELP SECTION -->
+    <!-- LOADING -->
     <div class="loading">
         <div class="square"></div>
     </div>
+    <!-- END LOADING -->
+
     <script src="./static/js/app.js"></script>
+
     <script src="./static/js/constant.js"></script>
+
     <script src="./static/js/game.js"></script>
+
 </body>
 
 </html>

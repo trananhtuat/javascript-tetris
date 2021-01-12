@@ -14,20 +14,6 @@
     --game-height: 736px;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-input,
-textarea,
-button,
-select,
-a {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 .dark {
     --bg-color: #243441;
     --color: #0affef;
@@ -38,18 +24,27 @@ a {
     --board-shadow-inset: inset -5px 5px 8px #21303c, inset 5px -5px 8px #273846;
 }
 
-html,
-body {
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: "Krona One", sans-serif;
     height: 100vh;
     background-color: var(--bg-color);
-    font-family: "Krona One", sans-serif;
     overflow: hidden;
+}
+
+button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .container {
     position: relative;
     height: 100%;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,16 +53,16 @@ body {
 .game-wrapper {
     position: relative;
     z-index: 99;
-    background-color: var(--bg-color);
-    box-shadow: var(--wrapper-shadow);
-    border-radius: var(--border-radius);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     width: 100%;
     max-width: var(--game-width);
     height: 100%;
     max-height: var(--game-height);
+    background-color: var(--bg-color);
+    box-shadow: var(--wrapper-shadow);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .info-section {
@@ -79,7 +74,7 @@ body {
     color: var(--color);
 }
 
-.info-section .level {
+.info-section #level {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -90,64 +85,60 @@ body {
 .board-section {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    width: max-content;
     margin: auto;
     padding: 10px;
     box-shadow: var(--board-shadow-inset);
     border-radius: 10px;
-    transform: scale(0);
-}
-
-.board-section,
-.info-section,
-.control-section {
-    /* transition: transform .5s ease-in-out; */
-    transform: scale(0);
-}
-
-.play .board-section,
-.play .info-section,
-.play .control-section {
-    transform: scale(1);
-}
-
-.play .menu-section {
-    transform: scale(0);
-}
-
-.play #btn-pause {
-    display: flex;
-}
-
-#btn-new-game,
-#btn-pause {
-    display: none;
-}
-
-.pause #btn-new-game,
-.end #btn-new-game {
-    display: block;
 }
 
 .block {
     width: var(--block-size);
     height: var(--block-size);
-    border: 0.125px solid var(--bg-color);
+    border: 0.1px solid var(--bg-color);
+}
+
+.setting-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.setting-section button {
+    margin: 0 10px;
+    color: var(--setting-btn-color);
+}
+
+i.bxs-moon {
+    display: block;
+}
+
+i.bxs-sun {
+    display: none;
+}
+
+.btn {
+    width: var(--button-size);
+    height: var(--button-size);
+    box-shadow: var(--btn-shadow);
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--color);
+    border: none;
+    outline: none;
+    background-color: var(--bg-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:active {
+    box-shadow: var(--btn-shadow-inset);
 }
 
 .control-section {
     display: none;
-}
-
-.menu-section {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.menu-section button {
-    margin-bottom: 30px;
 }
 
 .col {
@@ -170,52 +161,60 @@ body {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.btn {
-    box-shadow: var(--btn-shadow);
-    border-radius: 25px;
-    width: var(--button-size);
-    height: var(--button-size);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 30px;
-    color: var(--color);
-    border: none;
-    outline: none;
-    background-color: var(--bg-color);
-    cursor: pointer;
-}
-
-.btn:active {
-    box-shadow: var(--btn-shadow-inset);
-}
-
-.btn.active {
-    box-shadow: var(--btn-shadow-inset);
-}
-
 .btn-large {
     width: 80px !important;
     height: 80px !important;
     font-size: 30px;
 }
 
+.menu-section {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.menu-section button {
+    margin-bottom: 30px;
+}
+
 .btn-width {
     width: 200px;
+}
+
+.brand {
+    padding: 40px 0;
+    font-size: 25px;
+    color: var(--color);
+    text-align: center;
+}
+
+.result {
+    text-align: center;
+    margin-bottom: 90px;
+    display: none;
+}
+
+.result p {
+    color: var(--setting-btn-color);
+}
+
+.result h1 {
+    color: var(--color);
+    margin-bottom: 30px;
 }
 
 .how-to {
     position: absolute;
     top: 50%;
-    transform: translate(100%, -50%);
     right: 0;
+    transform: translate(100%, -50%);
     box-shadow: var(--wrapper-shadow);
     padding: 30px;
     border-radius: 20px;
     background-color: var(--bg-color);
-    transition: transform 0.5s ease-in-out;
     color: var(--color);
+    transition: transform 0.5s ease-in-out;
 }
 
 .how-to.active {
@@ -236,90 +235,14 @@ body {
     font-size: 20px;
 }
 
-.arrow-control .btn {
-    margin: 3px;
-}
-
-.setting-section {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.setting-section button {
-    margin: 0 10px;
-    color: var(--setting-btn-color);
-}
-
-.result {
-    text-align: center;
-    margin-bottom: 90px;
-    display: none;
-}
-
-.brand {
-    padding: 40px 0;
-    font-size: 25px;
-    color: var(--color);
-    text-align: center;
-}
-
-.end .result {
-    display: block;
-}
-
-.end #btn-play {
-    display: none;
-}
-
-.result p {
-    color: var(--setting-btn-color);
-}
-
-.result h1 {
-    color: var(--color);
-    margin-bottom: 30px;
-}
-
-i.bxs-moon {
-    display: block;
-}
-
-i.bxs-sun {
-    display: none;
-}
-
-.dark i.bxs-sun {
-    display: block;
-}
-
-.dark i.bxs-moon {
-    display: none;
-}
-
+/* images fall effect */
 .container img.fall {
     position: absolute;
     animation: fall linear infinite;
-    /* transform-origin: center center; */
 }
+/* end images fall effect */
 
-@keyframes fall {
-    0% {
-        transform: translateY(0) rotate(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(2000%) rotate(90deg);
-        opacity: 1;
-    }
-}
-
+/* loading */
 .loading {
     position: absolute;
     top: 0;
@@ -328,7 +251,6 @@ i.bxs-sun {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     background-color: var(--bg-color);
     z-index: 100;
     animation: hide 1s linear forwards;
@@ -341,7 +263,7 @@ i.bxs-sun {
     width: calc(var(--block-size) * 4);
     height: calc(var(--block-size) * 4);
     overflow: hidden;
-    animation: rotate 0.5s linear forwards;
+    animation: rotate .5s linear forwards;
     animation-delay: 2.2s;
 }
 
@@ -349,10 +271,31 @@ i.bxs-sun {
     width: var(--block-size);
     height: var(--block-size);
     border: 1px solid var(--bg-color);
-    animation: loading 0.5s linear forwards;
+    background-color: var(--color);
+    animation: down .5s linear forwards;
     transform: translateY(-500%);
 }
 
+/* L block */
+.loading .square div:nth-child(5),
+.loading .square div:nth-child(9),
+.loading .square div:nth-child(13),
+.loading .square div:nth-child(14) {
+    background-color: #e84393;
+}
+/* end L block */
+
+/* S block */
+.loading .square div:nth-child(6),
+.loading .square div:nth-child(10),
+.loading .square div:nth-child(11),
+.loading .square div:nth-child(15) {
+    background-color: #e1b12c;
+    animation-delay: .5s;
+}
+/* end S block */
+
+/* J block */
 .loading .square div:nth-child(1),
 .loading .square div:nth-child(2),
 .loading .square div:nth-child(3),
@@ -360,7 +303,9 @@ i.bxs-sun {
     background-color: #00cec9;
     animation-delay: 1.5s;
 }
+/* end J block */
 
+/* I block */
 .loading .square div:nth-child(4),
 .loading .square div:nth-child(8),
 .loading .square div:nth-child(12),
@@ -368,25 +313,15 @@ i.bxs-sun {
     background-color: #c23616;
     animation-delay: 1s;
 }
+/* end I block */
 
-.loading .square div:nth-child(5),
-.loading .square div:nth-child(9),
-.loading .square div:nth-child(13),
-.loading .square div:nth-child(14) {
-    background-color: #e84393;
-}
+/* end loading */
 
-.loading .square div:nth-child(6),
-.loading .square div:nth-child(10),
-.loading .square div:nth-child(11),
-.loading .square div:nth-child(15) {
-    background-color: #e1b12c;
-    animation-delay: 0.5s;
-}
+/* animation */
 
-@keyframes loading {
+@keyframes down {
     0% {
-        transform: translateY(-200%);
+        transform: translateY(-300%);
     }
     100% {
         transform: translateY(0);
@@ -414,14 +349,73 @@ i.bxs-sun {
     }
 }
 
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(2000%) rotate(90deg);
+        opacity: 1;
+    }
+}
+
+/* end animation */
+
+/*  state  */
+
+.board-section,
+.info-section,
+.control-section {
+    transform: scale(0);
+}
+
+.play .board-section,
+.play .info-section,
+.play .control-section {
+    transform: scale(1);
+}
+
+.play .menu-section {
+    transform: scale(0);
+}
+
+.play #btn-pause {
+    display: flex;
+}
+
+.pause #btn-new-game,
+.end #btn-new-game {
+    display: block;
+}
+
+.end .result {
+    display: block;
+}
+
+.end #btn-play {
+    display: none;
+}
+
+#btn-new-game,
+#btn-pause {
+    display: none;
+}
+
+/* end state  */
+
 @media only screen and (max-width: 425px) {
     :root {
         --block-size: 18px;
-    }
-
-    #btn-help,
-    .how-to {
-        display: none;
     }
 
     .game-wrapper {
@@ -436,6 +430,7 @@ i.bxs-sun {
 
     .setting-section {
         padding: unset;
+        margin-top: -40px
     }
 
     .play .setting-section {
@@ -445,13 +440,15 @@ i.bxs-sun {
         top: 50%;
         transform: translateY(-50%);
         right: 2px;
+        padding: unset;
     }
 
     .setting-section button {
         margin-bottom: 15px;
     }
 
-    .container img.fall {
+    .how-to,
+    #btn-help {
         display: none;
     }
 }

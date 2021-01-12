@@ -1,54 +1,49 @@
-let board_section = document.querySelector('.board-section')
+let board = document.querySelector('.board-section')
 
-for (let index = 0; index < 200; index++) {
-    let block = `
-        <div class="block"></div>
-    `
-    board_section.innerHTML += block
+for (let i = 0; i < 200; i++) {
+    let block = '<div class="block"></div>'
+    board.innerHTML += block
 }
 
 falls = () => {
-	let fall_count = 50
+    let fall_count = 50
 
-	let container = document.querySelector('.container')
+    let container = document.querySelector('.container')
 
-	let i = 0
+    for (let i = 0; i < fall_count; i++) {
+        
+        let img_index = Math.floor(Math.random() * 6) + 1
 
-	while (i < fall_count) {
+        let x = Math.floor(Math.random() * window.innerWidth)
+        let y = Math.floor(Math.random() * window.innerHeight)
 
-		let img_index = Math.floor(Math.random() * 6) + 1;
+        let size = Math.random() * 40
 
-		let x = Math.floor(Math.random() * window.innerWidth)
+        let duration = Math.random() * 70 + 30
 
-		let y = Math.floor(Math.random() * window.innerHeight)
+        let img = document.createElement('img')
 
-		let size = Math.random() * 40
-		let duration = Math.random() * 70 + 30
+        img.className = 'fall'
+        img.src = 'static/assets/images/' + img_index + '.png'
 
-		let img = document.createElement('img')
+        img.style.width = 1 + size + 'px'
+        img.style.height = 'auto'
 
-		img.className = 'fall'
-		img.src = 'static/assets/images/' + img_index + '.png'
+        img.style.left = x + 'px'
+        img.style.bottom = y + 'px'
 
-		img.style.width = 1 + size + 'px'
-		img.style.height = 'auto'
-		img.style.left = x + 'px'
-		img.style.bottom = y + 'px'
+        img.style.animationDuration = 2 + duration + 's'
+        img.style.animationDelay = -duration + 's'
 
-		img.style.animationDuration = 2 + duration + 's'
-		img.style.animationDelay = -duration + 's'
-
-		container.appendChild(img)
-
-		i++
-	}
+        container.appendChild(img)
+        
+    }
 }
 
 falls()
 
 let loading_square = document.querySelector('.square')
 
-for (let index = 0; index < 16; index++) {
-	loading_square.innerHTML += `<div></div>`
+for (let i = 0; i < 16; i++) {
+    loading_square.innerHTML += '<div></div>'
 }
-
