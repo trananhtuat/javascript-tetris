@@ -285,6 +285,8 @@ gameLoop = () => {
 // game start
 gameStart = () => {
     game.state = GAME_STATE.PLAY
+    level_span.innerHTML = 'lv. 1'
+    score_span.innerHTML = '0'
     tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
     drawTetromino(tetromino, grid)
     // interval
